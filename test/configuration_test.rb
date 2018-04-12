@@ -63,4 +63,18 @@ class ConfigurationTest < Webpacker::Test
       assert Webpacker.config.compile?
     end
   end
+
+  def test_env_disable_compile?
+    ENV["WEBPACKER_COMPILE"] = nil
+
+    with_rails_env("development") do
+      assert Webpacker.config.compile?
+    end
+
+    ENV["WEBPACKER_COMPILE"] = "false"
+
+    with_rails_env("development") do
+      refute Webpacker.config.compile?
+    end
+  end
 end

@@ -14,6 +14,10 @@ class Webpacker::Configuration
   end
 
   def compile?
+    if ENV["WEBPACKER_COMPILE"] === "false"
+      return false
+    end
+
     fetch(:compile)
   end
 
